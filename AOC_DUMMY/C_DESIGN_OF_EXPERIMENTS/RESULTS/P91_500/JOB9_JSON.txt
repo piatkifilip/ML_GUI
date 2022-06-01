@@ -1,0 +1,21 @@
+{
+    "GAUGE_LENGTH": 25.0,
+    "GAUGE_DIAMETER": 4.0,
+    "CONN_DIAMETER": 5.0,
+    "SPECIMEN_LENGTH": 72.0,
+    "ROUND_RADIUS": 3.0,
+    "THREADED_LENGTH": 15,
+    "MAX_DISPLACEMENT": 2.210208375,
+    "YIELD_STRESS": 339.06,
+    "MODULUS": 191860.44,
+    "UTS_STRAIN": 0.039062714742356335,
+    "UTS_STRESS": 518.89,
+    "Q1": 1.6,
+    "Q2": 0.9,
+    "Q3": 0.81,
+    "EN": 0.4,
+    "SN": 0.2,
+    "FN": 0.09,
+    "F": 0.0013,
+    "SLOPE": 755.1501244267201
+}

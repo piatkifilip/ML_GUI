@@ -1,0 +1,17 @@
+**/*.odb
+**/*.prt
+**/*.msg
+**/*.dat
+**/*.sta
+**/*.log
+**/*.sim
+**/*.xlsx
+# ##SPECIFIC PROJECT FILES
+/RESULTS/*/*/*.odb
+/RESULTS/*/*/*.prt
+/RESULTS/*/*/*.msg
+/RESULTS/*/*/*.dat
+/RESULTS/*/*/*.sta
+/RESULTS/*/*/*.log
+/RESULTS/*/*/*.sim
+/RESULTS/*/*/*.xlsx
