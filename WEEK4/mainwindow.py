@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
 
         item3 = QtWidgets.QTableWidgetItem()
         self.tableWidget.setItem(2,0, item3)
-
+        # ##MAIN TABLE HEADERS AND INDEX
         self.tableWidget.setVerticalHeaderLabels(["Diameter", "Gauge Length", "Height", "P1", "P2", "P3", "P4"])
         self.tableWidget.setHorizontalHeaderLabels(["Value", "Min", "Max"])
 

@@ -1,25 +1,32 @@
+# ##MAIN PACKAGE IMPORTS
+import os
+import sys
+import pandas as pd
+import csv
+# ## FROM OTHER PACKAGE INPUT FUNCTIONS
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGridLayout, QWidget, QTableWidget, QTableWidgetItem
 from PyQt5.QtCore import QSize, Qt
-import sys
 from DialogWindow import Ui_Dialog
-from MainWindow import Ui_MainWindow
-import pandas as pd
-import csv
+from mainwindow import Ui_MainWindow
 
 class Dialog(QtWidgets.QDialog, Ui_Dialog):
     def __init__(self, text, parent=None):
         super(Dialog, self).__init__(parent)
         self.setupUi(self)
 
-
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
         self.pushButton.clicked.connect(self.openWindow)
-        self.pushButton_5.clicked.connect(self.export)
-        self.pushButton_5.clicked.connect(self.export2)
+        self.pushButton_5.clicked.connect(self.export(filepath=os.getcwd(),
+                                                      filename='NAME1.csv',
+                                                      header=self.tableWidget.getVerticalHeaderLabels(), index=))
+        self.pushButton_5.clicked.connect(self.export(filepath=os.getcwd(),
+                                                      filename='NAME2.csv',
+                                                      header=self.tableWidget.verticalOffset(),
+                                                      index=))
 
     def passdata(self):
         item = self.tableWidget.item(0,0)
@@ -39,39 +46,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.buttonBox.clicked.connect(self.passdata)
         self.window.show()
 
-    def export(self):
-        header = ["Min", "Max"]
-        with open('PARAMETERS.csv', mode= 'w') as stream:
-            writer = csv.writer(stream, lineterminator='\n')
+    def export(self, filepath=os.getcwd(), filename=None, header=None, index=None):
+        # ##COMBINE THE FILE PATH AND FILE NAME AND OPEN IN WRITE MODE
+        with open(os.path.join(filepath, filename), mode= 'w') as file:
+            writer = csv.writer(file, lineterminator='\n')
             writer.writerow(header)
-            for row in range(3,self.tableWidget.rowCount()):
-                rowdata = []
-                for column in range(1,self.tableWidget.columnCount()):
-                    item = self.tableWidget.item(row, column)
-                    if item is not None:
-
-                        rowdata.append(item.text())
-                    else:
-                        rowdata.append('')
-
-                writer.writerow(rowdata)
-    def export2(self):
-        header = ["Diameter", "Gauge Length", "Height"]
-        with open('DIMENSIONS.csv',mode = 'w') as stream:
-            writer = csv.writer(stream, lineterminator='\n')
-            writer.writerow(header)
-            for row in range(0, self.tableWidget.rowCount()-4):
-                rowdata = []
-                for column in range(0, self.tableWidget.columnCount()-2):
-                    item = self.tableWidget.item(row, column)
-                    if item is not None:
-
-                        rowdata.append(item.text())
-                    else:
-                        rowdata.append('')
-
-                writer.writerow(rowdata)
-
+            for row in range(1, self.tableWidget.rowCount()):
+                rowlist=[]
+                # ##APPEND THE INDEX VALUE TO THE ROW
+                rowlist.append(index[row])
+                for col in range(1, self.tableWidget.columnCount()):
+                    # ##APPEND COLUMN DATA TO ROW
+                    rowlist.append(self.tableWidget.item(row, col))
+            # ##WRITE ROW LIST TO CSV
+            writer.writerow(rowlist)
+            # ##CLOSE THE FILE
+            file.close()
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
