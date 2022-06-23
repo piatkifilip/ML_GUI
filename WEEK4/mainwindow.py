@@ -25,6 +25,7 @@ class Ui_MainWindow(object):
         item3 = QtWidgets.QTableWidgetItem()
         self.tableWidget.setItem(2,0, item3)
         # ##MAIN TABLE HEADERS AND INDEX
+        # TODO: FILIP PLEASE ADD IN COMMENTS USING THE HASH KEY '# ##' TO GIVE SOME IDEA WHAT EACH LINE OF CODE IS DOING
         self.tableWidget.setVerticalHeaderLabels(["Diameter", "Gauge Length", "Height", "P1", "P2", "P3", "P4"])
         self.tableWidget.setHorizontalHeaderLabels(["Value", "Min", "Max"])
 
@@ -42,6 +43,10 @@ class Ui_MainWindow(object):
         self.pushButton = QtWidgets.QPushButton(self.layoutWidget)
         self.pushButton.setMinimumSize(QtCore.QSize(90, 90))
         self.pushButton.setMaximumSize(QtCore.QSize(90, 90))
+        # ##TODO: @Filip
+        # ## IS THIS SPECIMEN GEOMETRY? PLEASE SET OBJECT NAMES APPROPRIATELY IF THIS IS SPECIMEN GEOMETRY BUTTON THEN CALL IT 'pb_geom'
+        # ## and leave a note stating that 'pb' means push button. I ASK BECAUSE I WANT TO KNOW WHERE THE INFORMATION FOR PUSH BUTTON 1
+        # ## IS LOCATED? WHERE ARE YOU SPECIFYING THE INDEX NAMES (DIAMETER - D ETC.)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout.addWidget(self.pushButton)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -49,6 +54,7 @@ class Ui_MainWindow(object):
         self.pushButton_2 = QtWidgets.QPushButton(self.layoutWidget)
         self.pushButton_2.setMinimumSize(QtCore.QSize(90, 90))
         self.pushButton_2.setMaximumSize(QtCore.QSize(90, 90))
+
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout.addWidget(self.pushButton_2)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)

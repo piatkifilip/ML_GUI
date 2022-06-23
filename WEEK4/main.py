@@ -22,11 +22,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButton.clicked.connect(self.openWindow)
         self.pushButton_5.clicked.connect(self.export(filepath=os.getcwd(),
                                                       filename='NAME1.csv',
-                                                      header=self.tableWidget.getVerticalHeaderLabels(), index=))
+                                                      header=['H1',],
+                                                      index=['I1', 'I2']))
         self.pushButton_5.clicked.connect(self.export(filepath=os.getcwd(),
                                                       filename='NAME2.csv',
-                                                      header=self.tableWidget.verticalOffset(),
-                                                      index=))
+                                                      header=None,
+                                                      index=None))
 
     def passdata(self):
         item = self.tableWidget.item(0,0)
