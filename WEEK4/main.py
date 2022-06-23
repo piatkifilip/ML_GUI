@@ -59,10 +59,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 for col in range(1, self.tableWidget.columnCount()):
                     # ##APPEND COLUMN DATA TO ROW
                     rowlist.append(self.tableWidget.item(row, col))
-            # ##WRITE ROW LIST TO CSV
-            writer.writerow(rowlist)
-            # ##CLOSE THE FILE
-            file.close()
+                # ##WRITE ROW LIST TO CSV
+                writer.writerow(rowlist)
+                # ##ALTERNATIVE SHORTHAND ALLOWING REMOVAL OF ROWS 56-63 INCLUSIVE
+                # writer.writerow([index[row], [self.tableWidget.item(row, col) for c in range(1, self.tableWidget.columnCount())]])
+                # ##A SECOND ALTERNATIVE WOULD BE TO READ THE TABLE INTO A PANDAS DATAFRAME AND EXPORT THAT
+                # ## df = pd.DataFrame(self.tableWidget)
+                # ## df.to_csv(os.path.join(filepath, filename))
+        # ##CLOSE THE FILE
+        file.close()
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
