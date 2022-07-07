@@ -30,61 +30,83 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>170</y>
-      <width>761</width>
-      <height>301</height>
+      <y>230</y>
+      <width>301</width>
+      <height>221</height>
      </rect>
     </property>
     <row>
      <property name="text">
-      <string>Diameter</string>
+      <string>Gauge Diameter</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
     </row>
     <row>
      <property name="text">
       <string>Gauge Length</string>
      </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>Height</string>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
     </row>
     <row>
      <property name="text">
-      <string>P1</string>
+      <string>Specimen Height</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
     </row>
     <row>
      <property name="text">
-      <string>P2</string>
+      <string>Connector Diamater</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
     </row>
     <row>
      <property name="text">
-      <string>P3</string>
+      <string>Number of Elements</string>
      </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>P4</string>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
     </row>
     <column>
      <property name="text">
       <string>Value</string>
      </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Min</string>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
     </column>
-    <column>
+    <item row="0" column="0">
      <property name="text">
-      <string>Max</string>
+      <string/>
      </property>
-    </column>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </item>
    </widget>
    <widget class="QPushButton" name="pushButton_5">
     <property name="geometry">
@@ -138,7 +160,7 @@
        </property>
        <property name="text">
         <string>Specimen 
- Dimensions</string>
+ Geometry</string>
        </property>
       </widget>
      </item>
@@ -170,8 +192,8 @@
         </size>
        </property>
        <property name="text">
-        <string>Material 
- Properties</string>
+        <string>Parameter 
+ Bounds</string>
        </property>
       </widget>
      </item>
@@ -265,7 +287,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>New Set</string>
+     <string>Clear</string>
     </property>
    </widget>
    <widget class="QProgressBar" name="progressBar">
@@ -279,6 +301,135 @@
     </property>
     <property name="value">
      <number>24</number>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>230</y>
+      <width>431</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <row>
+     <property name="text">
+      <string>P1</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>P2</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>P3</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>P4</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>P5</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>P6</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>P7</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>P8</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+    </row>
+    <column>
+     <property name="text">
+      <string>Min</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Max</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>180</y>
+      <width>761</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Selected Variables&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>

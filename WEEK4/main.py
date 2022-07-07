@@ -20,14 +20,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
         self.pushButton.clicked.connect(self.openWindow)
-        self.pushButton_5.clicked.connect(self.export(filepath=os.getcwd(),
-                                                      filename='NAME1.csv',
-                                                      header=['H1',],
-                                                      index=['I1', 'I2']))
-        self.pushButton_5.clicked.connect(self.export(filepath=os.getcwd(),
-                                                      filename='NAME2.csv',
-                                                      header=None,
-                                                      index=None))
+        self.pushButton_5.clicked.connect(self.export)
 
     def passdata(self):
         item = self.tableWidget.item(0,0)
@@ -49,57 +42,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
     def export(self):
-    """ FUNCTION THAT WILL WORK IMMEDIATELY TO EXTRACT CSV DATA
-    PLEASE FILL IN LIST ITEMS (HEADER ROW AND INDEX ROW) APPROPRIATELY."""
-        # ##COMBINE THE FILE PATH AND FILE NAME AND OPEN IN WRITE MODE
         with open(os.path.join(os.getcwd(), 'PARAMETERS.csv'), mode= 'w') as file:
             writer = csv.writer(file, lineterminator='\n')
             writer.writerow(['header1', 'header1'])
             index = ['index1', 'index2', 'index3']
             for row in range(1, self.tableWidget.rowCount()):
                 rowlist=[]
-                # ##APPEND THE INDEX VALUE TO THE ROW
                 rowlist.append(index[row])
                 for col in range(1, self.tableWidget.columnCount()):
-                    # ##APPEND COLUMN DATA TO ROW
                     rowlist.append(self.tableWidget.item(row, col))
-                # ##WRITE ROW LIST TO CSV
                 writer.writerow(rowlist)
-                # ##ALTERNATIVE SHORTHAND ALLOWING REMOVAL OF ROWS 56-63 INCLUSIVE
-                # writer.writerow([index[row], [self.tableWidget.item(row, col) for c in range(1, self.tableWidget.columnCount())]])
-                # ##A SECOND ALTERNATIVE WOULD BE TO READ THE TABLE INTO A PANDAS DATAFRAME AND EXPORT THAT
-                # ## df = pd.DataFrame(self.tableWidget)
-                # ## df.to_csv(os.path.join(filepath, filename))
-        # ##CLOSE THE FILE
         file.close()
 
-    def export_future(self, filepath=os.getcwd(), filename=None, header=None, index=None):
-        """ FUNCTION THAT CAN BE USED FOR A TABLE OF ANY SIZE/SHAPE.
-        USER WILL PROVIDE FOLLOWING INPUTS:
-        FILEPATH: LOCATION OF WHERE FILE SHOULD BE SAVED, DEFAULTS TO CURRENT WORKING DIRECTORY
-        FILENAME: NAME OF THE FILE. MUST INCLUDE '.CSV'
-        HEADER: LIST OF STRING ITEMS REPRESENTING HEADER NAMES
-        INDEX: LIST OF STRING ITEMS REPRESENTING INDEX NAMES. """
-        # ##COMBINE THE FILE PATH AND FILE NAME AND OPEN IN WRITE MODE
-        with open(os.path.join(filepath, filename), mode= 'w') as file:
-            writer = csv.writer(file, lineterminator='\n')
-            writer.writerow(header)
-            for row in range(1, self.tableWidget.rowCount()):
-                rowlist=[]
-                # ##APPEND THE INDEX VALUE TO THE ROW
-                rowlist.append(index[row])
-                for col in range(1, self.tableWidget.columnCount()):
-                    # ##APPEND COLUMN DATA TO ROW
-                    rowlist.append(self.tableWidget.item(row, col))
-                # ##WRITE ROW LIST TO CSV
-                writer.writerow(rowlist)
-                # ##ALTERNATIVE SHORTHAND ALLOWING REMOVAL OF ROWS 56-63 INCLUSIVE
-                # writer.writerow([index[row], [self.tableWidget.item(row, col) for c in range(1, self.tableWidget.columnCount())]])
-                # ##A SECOND ALTERNATIVE WOULD BE TO READ THE TABLE INTO A PANDAS DATAFRAME AND EXPORT THAT
-                # ## df = pd.DataFrame(self.tableWidget)
-                # ## df.to_csv(os.path.join(filepath, filename))
-        # ##CLOSE THE FILE
-        file.close()
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)

@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGridLayout, QWidget, QTableWidget, QTableWidgetItem
-from PyQt5.QtCore import QSize, Qt
+from PyQt5.QtCore import QSize
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):

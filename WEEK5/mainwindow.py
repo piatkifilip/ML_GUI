@@ -7,6 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QFont
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -17,9 +20,11 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
+
+
         # Create Value Table
         self.ValTable = QtWidgets.QTableWidget(self.centralwidget)
-        self.ValTable.setGeometry(QtCore.QRect(20, 230, 301, 221))
+        self.ValTable.setGeometry(QtCore.QRect(20, 240, 361, 221))
         self.ValTable.setObjectName("ValTable")
         self.ValTable.setColumnCount(1)
         self.ValTable.setRowCount(5)
@@ -83,6 +88,7 @@ class Ui_MainWindow(object):
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.ButtonLayout.addItem(spacerItem1)
 
+
         # Define Parameter Button - Used to open paramater DialogWindow2
         self.ParameterButton = QtWidgets.QPushButton(self.layoutWidget)
         self.ParameterButton.setMinimumSize(QtCore.QSize(90, 90))
@@ -93,11 +99,11 @@ class Ui_MainWindow(object):
         self.ButtonLayout.addItem(spacerItem2)
 
         # Define 'Other' Button - Large button on top right - Currently no use
-        self.OtherButton = QtWidgets.QPushButton(self.layoutWidget)
-        self.OtherButton.setMinimumSize(QtCore.QSize(90, 90))
-        self.OtherButton.setMaximumSize(QtCore.QSize(90, 90))
-        self.OtherButton.setObjectName("OtherButton")
-        self.ButtonLayout.addWidget(self.OtherButton)
+        self.RunButton = QtWidgets.QPushButton(self.layoutWidget)
+        self.RunButton.setMinimumSize(QtCore.QSize(90, 90))
+        self.RunButton.setMaximumSize(QtCore.QSize(90, 90))
+        self.RunButton.setObjectName("RunButton")
+        self.ButtonLayout.addWidget(self.RunButton)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.ButtonLayout.addItem(spacerItem3)
 
@@ -123,7 +129,7 @@ class Ui_MainWindow(object):
 
         # Create Parameter Table
         self.ParamTable = QtWidgets.QTableWidget(self.centralwidget)
-        self.ParamTable.setGeometry(QtCore.QRect(340, 230, 431, 221))
+        self.ParamTable.setGeometry(QtCore.QRect(430, 240, 341, 221))
         self.ParamTable.setObjectName("ParamTable")
         self.ParamTable.setColumnCount(2)
         self.ParamTable.setRowCount(8)
@@ -250,33 +256,66 @@ class Ui_MainWindow(object):
         P8valmax = QtWidgets.QTableWidgetItem()
         self.ParamTable.setItem(7, 1, P8valmax)
 
+        # Create hidden spinbox to store value of diameter as int
+
+        self.hiddenValueMain = QtWidgets.QSpinBox(self.centralwidget)
+        self.hiddenValueMain.move(10,10)
+        self.hiddenValueMain.setHidden(False)
+        self.hiddenValueMain.setValue(5)
+
+        # Adding Icons
+
+        self.SpecGeoButton.setIcon(QtGui.QIcon('height.png'))
+        self.SpecGeoButton.setIconSize(QSize(30,40))
+
+        self.ParameterButton.setIcon(QtGui.QIcon('bounding-box.png'))
+        self.ParameterButton.setIconSize(QSize(30, 40))
+
+        self.ResultsButton.setIcon(QtGui.QIcon('research.png'))
+        self.ResultsButton.setIconSize(QSize(25,40))
+
+        self.RunButton.setIcon(QtGui.QIcon('input.png'))
+        self.RunButton.setIconSize(QSize(30,40))
+
+        self.SpecLabel = QtWidgets.QLabel(self.centralwidget)
+        self.SpecLabel.move(115, 90)
+        self.SpecLabel.setText('Specimen\nGeometry')
+
+        self.ParameterLabel = QtWidgets.QLabel(self.centralwidget)
+        self.ParameterLabel.move(285, 90)
+        self.ParameterLabel.setText('Parameter\n  Bounds')
+
+        self.runLabel = QtWidgets.QLabel(self.centralwidget)
+        self.runLabel.move(460,90)
+        self.runLabel.setText('Calculate')
+
+        self.resultsLabel = QtWidgets.QLabel(self.centralwidget)
+        self.resultsLabel.move(640,90)
+        self.resultsLabel.setText(' View \nResults')
+
+
     # Function used to create titles/names
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         item = self.ValTable.verticalHeaderItem(0)
-        item.setText(_translate("MainWindow", "Gauge Diameter"))
+        item.setText(_translate("MainWindow", "Gauge Diameter - mm"))
         item = self.ValTable.verticalHeaderItem(1)
-        item.setText(_translate("MainWindow", "Gauge Length"))
+        item.setText(_translate("MainWindow", "Gauge Length - mm"))
         item = self.ValTable.verticalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Specimen Height"))
+        item.setText(_translate("MainWindow", "Specimen Height - mm"))
         item = self.ValTable.verticalHeaderItem(3)
-        item.setText(_translate("MainWindow", "Connector Diamater"))
+        item.setText(_translate("MainWindow", "Connector Diamater - mm"))
         item = self.ValTable.verticalHeaderItem(4)
-        item.setText(_translate("MainWindow", "Number of Elements"))
+        item.setText(_translate("MainWindow", "Number of Elements - µm"))
         item = self.ValTable.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Value"))
         __sortingEnabled = self.ValTable.isSortingEnabled()
         self.ValTable.setSortingEnabled(False)
         self.ValTable.setSortingEnabled(__sortingEnabled)
         self.FinishButton.setText(_translate("MainWindow", "Finish"))
-        self.SpecGeoButton.setText(_translate("MainWindow", "Specimen \n"
-" Geometry"))
-        self.ParameterButton.setText(_translate("MainWindow", "Parameter \n"
-" Bounds"))
-        self.OtherButton.setText(_translate("MainWindow", "Other"))
-        self.ResultsButton.setText(_translate("MainWindow", "View \n"
-" Results"))
+
+
         self.ClearButton.setText(_translate("MainWindow", "Clear"))
         item = self.ParamTable.verticalHeaderItem(0)
         item.setText(_translate("MainWindow", "P1"))
