@@ -183,7 +183,6 @@ class run(QtWidgets.QDialog, Ui_Dialog3):
         self.setupUi(self)
         self.hiddenLabel.setValue(diameter)
 
-
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     Dialog = Ui_Dialog()
