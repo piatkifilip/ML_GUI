@@ -115,7 +115,7 @@ class Ui_Dialog2(object):
         self.P5txt.setGeometry(QtCore.QRect(10, 190, 41, 21))
         self.P5txt.setObjectName("P5txt")
         self.P8txt = QtWidgets.QLabel(Dialog)
-        self.P8txt.setGeometry(QtCore.QRect(10, 280, 41, 21))
+        self.P8txt.setGeometry(QtCore.QRect(10, 280, 70, 21))
         self.P8txt.setObjectName("P8txt")
         self.P7txt = QtWidgets.QLabel(Dialog)
         self.P7txt.setGeometry(QtCore.QRect(10, 250, 41, 21))
@@ -125,6 +125,7 @@ class Ui_Dialog2(object):
         self.P6txt.setObjectName("P6txt")
 
         self.retranslateUi(Dialog)
+        self.OkButton.accepted.connect(Dialog.accept)
         self.OkButton.rejected.connect(Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
@@ -133,16 +134,16 @@ class Ui_Dialog2(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.Min.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:11pt; font-weight:600; text-decoration: underline;\">Min</span></p></body></html>"))
-        self.Max.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:11pt; font-weight:600; text-decoration: underline;\">Max</span></p></body></html>"))
-        self.P1txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt;\">P1 - </span></p></body></html>"))
-        self.P2txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt;\">P2 - </span></p></body></html>"))
-        self.P3txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt;\">P3 - </span></p></body></html>"))
-        self.P4txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt;\">P4 - </span></p></body></html>"))
-        self.P5txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt;\">P5 - </span></p></body></html>"))
-        self.P8txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt;\">P8 - </span></p></body></html>"))
-        self.P7txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt;\">P7 - </span></p></body></html>"))
-        self.P6txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt;\">P6 - </span></p></body></html>"))
+        self.Min.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; text-decoration: underline;\">Min</span></p></body></html>"))
+        self.Max.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; text-decoration: underline;\">Max</span></p></body></html>"))
+        self.P1txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:9pt;\">  </span><span style=\" font-size:11pt;\">  q</span><span style=\" font-size:9pt; vertical-align:sub;\">1</span></p></body></html>"))
+        self.P2txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:9pt;\">  </span><span style=\" font-size:11pt;\">  q</span><span style=\" font-size:9pt; vertical-align:sub;\">2</span></p></body></html>"))
+        self.P3txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:9pt;\">  </span><span style=\" font-size:11pt;\">  q</span><span style=\" font-size:9pt; vertical-align:sub;\">3</span></p></body></html>"))
+        self.P4txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:9pt;\">  </span><span style=\" font-size:11pt;\">  q</span><span style=\" font-size:9pt; vertical-align:sub;\">4</span></p></body></html>"))
+        self.P5txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:9pt;\">  </span><span style=\" font-size:11pt;\">  q</span><span style=\" font-size:9pt; vertical-align:sub;\">5</span></p></body></html>"))
+        self.P6txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:9pt;\">  </span><span style=\" font-size:11pt;\">  q</span><span style=\" font-size:9pt; vertical-align:sub;\">6</span></p></body></html>"))
+        self.P7txt.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:9pt;\">  </span><span style=\" font-size:11pt;\">  q</span><span style=\" font-size:9pt; vertical-align:sub;\">7</span></p></body></html>"))
+        self.P8txt.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:9pt;\">  </span><span style=\" font-size:11pt;\">m</span><span style=\" font-size:9pt; vertical-align:sub;\">kN/mm</span></p></body></html>"))
 
 
 if __name__ == "__main__":

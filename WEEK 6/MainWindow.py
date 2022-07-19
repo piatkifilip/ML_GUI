@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 580)
         MainWindow.setMinimumSize(QtCore.QSize(800, 580))
-        MainWindow.setMaximumSize(QtCore.QSize(800, 580))
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -124,10 +124,11 @@ class Ui_MainWindow(object):
         self.ClearButton.setObjectName("ClearButton")
 
         # Progress bar - Currently has no function other than visual
-        self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar.setGeometry(QtCore.QRect(20, 490, 401, 30))
-        self.progressBar.setProperty("value", 24)
-        self.progressBar.setObjectName("progressBar")
+        self.output = QtWidgets.QTextEdit(self.centralwidget, readOnly = True)
+        self.output.setGeometry(QtCore.QRect(20, 490, 401, 40))
+        self.output.setObjectName("output")
+
+
 
         # Create Parameter Table
         self.ParamTable = QtWidgets.QTableWidget(self.centralwidget)
@@ -283,15 +284,15 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         item = self.ValTable.verticalHeaderItem(0)
-        item.setText(_translate("MainWindow", "Gauge Diameter - mm"))
-        item = self.ValTable.verticalHeaderItem(1)
         item.setText(_translate("MainWindow", "Gauge Length - mm"))
-        item = self.ValTable.verticalHeaderItem(2)
+        item = self.ValTable.verticalHeaderItem(1)
         item.setText(_translate("MainWindow", "Specimen Height - mm"))
+        item = self.ValTable.verticalHeaderItem(2)
+        item.setText(_translate("MainWindow", "Gauge Diameter - mm"))
         item = self.ValTable.verticalHeaderItem(3)
         item.setText(_translate("MainWindow", "Connector Diamater - mm"))
         item = self.ValTable.verticalHeaderItem(4)
-        item.setText(_translate("MainWindow", "Min. No. of Elements - µm"))
+        item.setText(_translate("MainWindow", "Minimum Element Size - µm"))
         item = self.ValTable.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Value"))
         __sortingEnabled = self.ValTable.isSortingEnabled()

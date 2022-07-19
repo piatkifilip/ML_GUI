@@ -9,6 +9,9 @@ import numpy as np
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Dialog3(object):
+
+    CSAval = 0
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(200, 200)
@@ -52,6 +55,7 @@ class Ui_Dialog3(object):
         self.diameter = self.hiddenLabel.value()
         self.CSA = (np.square(self.diameter))*np.pi
         self.lineEdit.setText(str(round(self.CSA, 6)))
+        Ui_Dialog3.CSAval = self.CSA
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate

@@ -13,6 +13,7 @@ class Ui_Dialog(object):
         self.OkButton.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.OkButton.setObjectName("OkButton")
 
+
         self.frame = QtWidgets.QFrame(Dialog)
         self.frame.setGeometry(QtCore.QRect(180, 60, 311, 231))
         palette = QtGui.QPalette()
@@ -108,6 +109,7 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
 
+        self.OkButton.accepted.connect(Dialog.accept)
         self.OkButton.rejected.connect(Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 

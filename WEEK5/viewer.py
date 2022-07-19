@@ -9,6 +9,7 @@ class QImageViewer(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        self.setWindowTitle("Image Viewer")
         self.printer = QPrinter()
         self.scaleFactor = 0.0
 

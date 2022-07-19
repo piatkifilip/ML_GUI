@@ -8,7 +8,8 @@ import csv
 # ## FROM OTHER PACKAGE INPUT FUNCTIONS
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QLabel,QApplication, QMainWindow, QGridLayout, QWidget,\
-    QTableWidget, QTableWidgetItem,QToolBar,QStatusBar,QAction,QMenuBar,QVBoxLayout
+    QTableWidget, QTableWidgetItem,QToolBar,QStatusBar,QAction,QMenuBar,QVBoxLayout, QStyledItemDelegate, QMenu,QMessageBox
+
 from PyQt5.QtCore import QSize, pyqtSignal, QObject
 from DialogWindow1 import Ui_Dialog
 from DialogWindow2 import Ui_Dialog2
@@ -18,6 +19,14 @@ from viewer import QImageViewer
 
 # Connect Buttons to Relevant Functions for Mainwindow
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+
+    @QtCore.pyqtSlot(str)
+    def lineEditDEF(self, string):
+        self.output.append(string)
+
+    @QtCore.pyqtSlot(float)
+    def lineEditVAL(self, value):
+        self.output.append(str(value))
 
     @QtCore.pyqtSlot(float, float, float, float, int)
     def save(self, Val1, Val2, Val3, Val4, Val5):
@@ -55,11 +64,36 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.SpecGeoButton.clicked.connect(self.openWindow)
         self.ParameterButton.clicked.connect(self.openWindow2)
-        self.FinishButton.clicked.connect(self.createDFParam)
-        self.FinishButton.clicked.connect(self.createDF)
+
+        self.FinishButton.clicked.connect(self.close)
+
         self.ClearButton.clicked.connect(self.clear)
         self.RunButton.clicked.connect(self.openWindow3)
         self.ResultsButton.clicked.connect(self.openWindow4)
+
+        delegate = ReadOnly(self)
+        self.ValTable.setItemDelegateForRow(1, delegate)
+        self.ValTable.setItemDelegateForColumn(0, delegate)
+
+        self.ParamTable.setItemDelegateForRow(1, delegate)
+        self.ParamTable.setItemDelegateForColumn(0,delegate)
+        self.ParamTable.setItemDelegateForColumn(1, delegate)
+
+        self.createActions()
+        self.createMenus()
+        self.output.setText("Standby...")
+        self.setWindowTitle("Program")
+        self.setWindowIcon(QtGui.QIcon("logo.png"))
+        self.output.setStyleSheet("background-color: black; color: white")
+
+
+    def createMenus(self):
+        self.helpMenu = QMenu("&Help", self)
+        self.helpMenu.addAction(self.aboutAct)
+        self.menuBar().addMenu(self.helpMenu)
+
+    def createActions(self):
+        self.aboutAct = QAction("&About", self, triggered=self.about)
 
     # Function used to open DialogWindow1
     def openWindow(self):
@@ -80,6 +114,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # Function used to open DialogWindow3
     def openWindow3(self):
        self.runWindow = run(self.hiddenValueMain.value())
+       self.runWindow.submit.connect(self.lineEditDEF)
+       self.runWindow.submitval.connect(self.lineEditVAL)
        self.runWindow.show()
 
     # Function used to open run Window - calculate CSA
@@ -91,7 +127,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def createDFParam(self):
         col_count = self.ParamTable.columnCount()
         row_count = self.ParamTable.rowCount()
-        index = ['P1','P2','P3','P4','P5','P6','P7','P8']
+        index = ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8']
         headers = [str(self.ParamTable.horizontalHeaderItem(i).text()) for i in range(col_count)]
         df_list = []
         for row in range(row_count):
@@ -101,12 +137,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 df_list2.append('' if table_item is None else str(table_item.text()))
             df_list.append(df_list2)
 
-        df = pd.DataFrame(df_list, columns=headers,index=index)
+        df = pd.DataFrame(df_list, columns=headers, index=index)
         df.to_csv(r'C:\Users\piatk\PycharmProjects\ML_GUI\WEEK5\PARAMETERS.csv', index=True, header=True)
 
         return df
 
     # Create Dataframe from Value Table
+    @QtCore.pyqtSlot()
     def createDF(self):
         col_count = self.ValTable.columnCount()
         row_count = self.ValTable.rowCount()
@@ -149,6 +186,32 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ParamTable.setItem(5, 1, QtWidgets.QTableWidgetItem("0.0"))
         self.ParamTable.setItem(6, 1, QtWidgets.QTableWidgetItem("0.0"))
         self.ParamTable.setItem(7, 1, QtWidgets.QTableWidgetItem("0.0"))
+
+        MainWindow.val1 = 0.0
+        MainWindow.val2 = 0.0
+        MainWindow.val3 = 0.0
+        MainWindow.val4 = 0.0
+        MainWindow.val5 = 0
+
+        MainWindow.P1 = 0.0
+        MainWindow.P2 = 0.0
+        MainWindow.P3 = 0.0
+        MainWindow.P4 = 0.0
+        MainWindow.P5 = 0.0
+        MainWindow.P6 = 0.0
+        MainWindow.P7 = 0.0
+        MainWindow.P8 = 0.0
+
+        MainWindow.P1m = 0.0
+        MainWindow.P2m = 0.0
+        MainWindow.P3m = 0.0
+        MainWindow.P4m = 0.0
+        MainWindow.P5m = 0.0
+        MainWindow.P6m = 0.0
+        MainWindow.P7m = 0.0
+        MainWindow.P8m = 0.0
+
+        self.hiddenValueMain.setValue(0)
 
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_Escape:
@@ -195,6 +258,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.int1 = int1
         self.hiddenValueMain.setValue(int(int1))
 
+    def about(self):
+        QMessageBox.about(self, "About Program",
+                          "<p>1) The <b>Specimen Geometry</b> button allows the user to input "
+                          "vales for Diameter, Gauge Length.. etc. "
+                          "Using the arrows on the boxes the values for each input can be adjusted </p> "
+                          "<p>2) The <b>Parameter Bounds</b> button works similar to the button 1, "
+                          "it allows an input for values  q1,q2 .. etc. </p> "
+                          "<p> Once the windows created by button 1 & 2 have been closed "
+                          "the values will be updated in the table in the main window </p> "
+                          "<p>3) The <b>Run</b> button uses values inputted by the user to complete "
+                          "relevant calculations </p> "
+                          "<p>4) <b>View Results</b> allows viewing of images created by the program. "
+                          "On the top left-hand side the user needs to select the file directory"
+                          "")
 
     values = QtCore.pyqtSignal(int)
     val1 = 0.0
@@ -221,15 +298,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     P7m = 0.0
     P8m = 0.0
 
+    vall = 0
+
+
 class Dialog(QtWidgets.QDialog, Ui_Dialog):
 
     submit = QtCore.pyqtSignal(str, str, str, str, str)
     submitDiameter = QtCore.pyqtSignal(float)
     submitInt = QtCore.pyqtSignal(float, float, float, float, int)
+    submitStr = QtCore.pyqtSignal(str)
 
     def __init__(self, parent = None):
         super().__init__(parent)
         self.setupUi(self)
+        self.setWindowTitle("Specimen Geometry")
         self.OkButton.clicked.connect(self.saveDiam)
         self.OkButton.clicked.connect(self.onSubmit)
 
@@ -238,7 +320,7 @@ class Dialog(QtWidgets.QDialog, Ui_Dialog):
         self.GaugeDbox.setValue(MainWindow.val3)
         self.ConnectorDbox.setValue(MainWindow.val4)
         self.NumElbox.setValue(MainWindow.val5)
-
+        self.setWindowIcon(QtGui.QIcon("logo.png"))
 
     def saveDiam(self):
         self.submitDiameter.emit(self.GaugeDbox.value())
@@ -249,6 +331,7 @@ class Dialog(QtWidgets.QDialog, Ui_Dialog):
 
         self.submitInt.emit(self.GaugeLenbox.value(), self.Heightbox.value(), self.GaugeDbox.value(),
                             self.ConnectorDbox.value(), self.NumElbox.value())
+        self.submitStr.emit("")
 
 class Dialog2(QtWidgets.QDialog, Ui_Dialog2):
     submit = QtCore.pyqtSignal(str, str, str, str, str, str, str, str,
@@ -258,6 +341,7 @@ class Dialog2(QtWidgets.QDialog, Ui_Dialog2):
     def __init__(self, parent = None):
         super().__init__(parent)
         self.setupUi(self)
+        self.setWindowTitle("Parameter Bounds")
         self.OkButton.clicked.connect(self.onSubmit)
         self.P1box.setValue(MainWindow.P1)
         self.P2box.setValue(MainWindow.P2)
@@ -276,6 +360,7 @@ class Dialog2(QtWidgets.QDialog, Ui_Dialog2):
         self.P6boxMax.setValue(MainWindow.P6m)
         self.P7boxMax.setValue(MainWindow.P7m)
         self.P8boxMax.setValue(MainWindow.P8m)
+        self.setWindowIcon(QtGui.QIcon("logo.png"))
 
     def onSubmit(self):
         self.submit.emit(str(self.P1box.value()), str(self.P2box.value()), str(self.P3box.value()), str(self.P4box.value()),
@@ -291,10 +376,24 @@ class Dialog2(QtWidgets.QDialog, Ui_Dialog2):
 
 
 class run(QtWidgets.QDialog, Ui_Dialog3):
+    submit = QtCore.pyqtSignal(str)
+    submitval = QtCore.pyqtSignal(float)
     def __init__(self, diameter, parent = None):
         super().__init__(parent)
         self.setupUi(self)
+        self.setWindowTitle("Run")
         self.hiddenLabel.setValue(diameter)
+        self.pushButton.clicked.connect(self.send)
+        self.setWindowIcon(QtGui.QIcon("logo.png"))
+
+    def send(self):
+        self.submit.emit("Calculating CSA... \nThe CSA is...")
+        self.submitval.emit(round(self.CSAval))
+
+
+class ReadOnly(QStyledItemDelegate):
+    def createEditor(self, parent, option, index):
+        return
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
