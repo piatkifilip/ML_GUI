@@ -82,7 +82,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.createActions()
         self.createMenus()
         self.output.setText("Standby...")
-        self.setWindowTitle("Program")
+        self.setWindowTitle("Calibration of GTM model")
         self.setWindowIcon(QtGui.QIcon("logo.png"))
         self.output.setStyleSheet("background-color: black; color: white")
 
@@ -116,6 +116,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
        self.runWindow = run(self.hiddenValueMain.value())
        self.runWindow.submit.connect(self.lineEditDEF)
        self.runWindow.submitval.connect(self.lineEditVAL)
+       self.runWindow.launch.connect(self.createDF)
        self.runWindow.show()
 
     # Function used to open run Window - calculate CSA
@@ -143,8 +144,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         return df
 
     # Create Dataframe from Value Table
-    @QtCore.pyqtSlot()
-    def createDF(self):
+    @QtCore.pyqtSlot(str)
+    def createDF(self, test):
+        self.output.append(test)
         col_count = self.ValTable.columnCount()
         row_count = self.ValTable.rowCount()
         headers = [str(self.ValTable.horizontalHeaderItem(i).text()) for i in range(col_count)]
@@ -262,15 +264,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         QMessageBox.about(self, "About Program",
                           "<p>1) The <b>Specimen Geometry</b> button allows the user to input "
                           "vales for Diameter, Gauge Length.. etc. "
-                          "Using the arrows on the boxes the values for each input can be adjusted </p> "
+                          "Using the arrows on the boxes, the values for each input can be adjusted. </p> "
                           "<p>2) The <b>Parameter Bounds</b> button works similar to the button 1, "
                           "it allows an input for values  q1,q2 .. etc. </p> "
-                          "<p> Once the windows created by button 1 & 2 have been closed "
+                          "<p> Once the windows created by button 1 & 2 have been closed, "
                           "the values will be updated in the table in the main window </p> "
                           "<p>3) The <b>Run</b> button uses values inputted by the user to complete "
-                          "relevant calculations </p> "
+                          "relevant calculations. </p> "
                           "<p>4) <b>View Results</b> allows viewing of images created by the program. "
-                          "On the top left-hand side the user needs to select the file directory"
+                          "On the top left-hand side the user needs to select the file directory to view an image."
                           "")
 
     values = QtCore.pyqtSignal(int)
@@ -378,6 +380,7 @@ class Dialog2(QtWidgets.QDialog, Ui_Dialog2):
 class run(QtWidgets.QDialog, Ui_Dialog3):
     submit = QtCore.pyqtSignal(str)
     submitval = QtCore.pyqtSignal(float)
+    launch = QtCore.pyqtSignal(str)
     def __init__(self, diameter, parent = None):
         super().__init__(parent)
         self.setupUi(self)
@@ -389,6 +392,7 @@ class run(QtWidgets.QDialog, Ui_Dialog3):
     def send(self):
         self.submit.emit("Calculating CSA... \nThe CSA is...")
         self.submitval.emit(round(self.CSAval))
+        self.launch.emit("CSV written.")
 
 
 class ReadOnly(QStyledItemDelegate):

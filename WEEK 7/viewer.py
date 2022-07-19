@@ -1,5 +1,5 @@
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QImage, QPixmap, QPalette, QPainter
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import QImage, QPixmap, QPalette, QPainter,QIcon
 from PyQt5.QtPrintSupport import QPrintDialog, QPrinter
 from PyQt5.QtWidgets import QLabel, QSizePolicy, QScrollArea, QMessageBox, QMainWindow, QMenu, QAction, \
     qApp, QFileDialog
@@ -28,6 +28,7 @@ class QImageViewer(QMainWindow):
         self.createMenus()
 
         self.setWindowTitle("Image Viewer")
+        self.setWindowIcon(QtGui.QIcon("logo.png"))
         self.resize(800, 600)
 
     def open(self):

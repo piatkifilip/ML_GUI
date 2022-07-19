@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
 
         self.ColorLabel = QtWidgets.QLabel(self.centralwidget)
         self.ColorLabel.setGeometry(80, 25, 640, 110)
-        self.ColorLabel.setPixmap(QtGui.QPixmap("background.jpg"))
+        self.ColorLabel.setStyleSheet("background-color: gray")
 
         # Create Value Table
         self.ValTable = QtWidgets.QTableWidget(self.centralwidget)
@@ -125,7 +125,7 @@ class Ui_MainWindow(object):
 
         # Progress bar - Currently has no function other than visual
         self.output = QtWidgets.QTextEdit(self.centralwidget, readOnly = True)
-        self.output.setGeometry(QtCore.QRect(20, 490, 401, 40))
+        self.output.setGeometry(QtCore.QRect(20, 490, 361, 40))
         self.output.setObjectName("output")
 
 

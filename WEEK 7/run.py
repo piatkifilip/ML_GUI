@@ -49,7 +49,7 @@ class Ui_Dialog3(object):
         self.hiddenLabel.setValue(10)
 
         self.pushButton.clicked.connect(self.calcCSA)
-
+        self.calcCSA()
 
     def calcCSA(self):
         self.diameter = self.hiddenLabel.value()
@@ -60,7 +60,7 @@ class Ui_Dialog3(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.pushButton.setText(_translate("Dialog", "Calculate"))
+        self.pushButton.setText(_translate("Dialog", "Launch BO"))
         self.label.setText(_translate("Dialog", "<html><head/><body><p align=\"center\">Cross-Sectional </p><p align=\"center\"> Area is</p></body></html>"))
 
 
